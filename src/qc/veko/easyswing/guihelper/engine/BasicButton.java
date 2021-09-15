@@ -114,7 +114,10 @@ public class BasicButton extends JComponent implements MouseListener{
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		panel.onButtonClick(this);
+		if (e.getButton() == MouseEvent.BUTTON3)
+			panel.onButtonRightClick(this);
+		else
+			panel.onButtonClick(this);
 		
 	}
 	@Override

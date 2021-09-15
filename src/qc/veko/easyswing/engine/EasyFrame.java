@@ -28,7 +28,6 @@ public class EasyFrame extends JFrame{
     	this.setFocusable(true);
     	this.setLocationRelativeTo(null);
     	//this.setAlwaysOnTop(true);
-    	setLayout(null);
 	}
 
 	@SuppressWarnings("static-access")

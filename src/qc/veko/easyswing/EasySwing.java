@@ -13,5 +13,9 @@ public class EasySwing {
 	public static EasyFrame getFrame() {
 		return jFrame;
 	}
+
+	public void setFrame(EasyFrame frame) {
+		jFrame = frame;
+	}
 	
 }
