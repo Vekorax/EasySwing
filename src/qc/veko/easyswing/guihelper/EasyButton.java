@@ -5,10 +5,7 @@ import qc.veko.easyswing.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.IOException;
 
 public class EasyButton {
@@ -17,6 +14,10 @@ public class EasyButton {
 	
 	private EasyPanel panel;
 	public static Font font = new Font("Arial", Font.PLAIN, 10);
+
+	private EasyRectangle rect;
+	private int x;
+	private int y;
 	
 	public EasyButton (EasyPanel panel, int minX, int minY, int maxX, int maxY, String name, int id, String path) {
 		this.panel = panel;
@@ -27,7 +28,46 @@ public class EasyButton {
 		button.setBorderPainted(false);
 		button.setFont(font);
 		button.setFocusPainted(false);
+		x = minX;
+		y = minY;
 		this.id = id;
+	}
+
+	public EasyButton addComentary(EasyRectangle rect) {
+		this.rect = rect;
+		button.addMouseListener(addComentary());
+		return this;
+	}
+
+	private MouseListener addComentary() {
+		MouseListener mouseListener = new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if(rect != null) {
+					rect.setPosition(x, y-50);
+					rect.add();
+					panel.repaint();
+				}
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if(rect != null) {
+					rect.remove();
+					panel.repaint();
+				}
+			}
+		};
+		return mouseListener;
 	}
 
 	private MouseAdapter onRightClick(EasyButton button) {
